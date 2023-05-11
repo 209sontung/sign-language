@@ -12,16 +12,6 @@ import mediapipe as mp
 from multiprocessing import cpu_count
 
 
-# train_df = pd.read_csv('/Users/sontung/Documents /MyDocuments/NEU/Thesis/sign_language/resources/train.csv')
-# print("\n\n... LOAD SIGN TO PREDICTION INDEX MAP FROM JSON FILE ...\n")
-# s2p_map = {k.lower():v for k,v in read_json_file(os.path.join("/Users/sontung/Documents /MyDocuments/NEU/Thesis/sign_language/resources/sign_to_prediction_index_map.json")).items()}
-# p2s_map = {v:k for k,v in read_json_file(os.path.join("/Users/sontung/Documents /MyDocuments/NEU/Thesis/sign_language/resources/sign_to_prediction_index_map.json")).items()}
-# encoder = lambda x: s2p_map.get(x.lower())
-# decoder = lambda x: p2s_map.get(x)
-# print(s2p_map)
-# train_df['label'] = train_df.sign.map(encoder)
-
-
 mp_holistic = mp.solutions.holistic # holistic model
 mp_drawing = mp.solutions.drawing_utils # drawing utilities
 
@@ -81,7 +71,7 @@ encoder = lambda x: s2p_map.get(x.lower())
 decoder = lambda x: p2s_map.get(x)
 
 models_path = [
-                '/Users/sontung/Documents /MyDocuments/NEU/Thesis/sign_language/islr-fp16-192-8-seed42-fold0-best.h5',
+                '/Users/sontung/Documents /MyDocuments/NEU/Thesis/sign_language/models/islr-fp16-192-8-seed42-fold0-best.h5',
 ]
 models = [get_model() for _ in models_path]
 for model,path in zip(models,models_path):
@@ -107,14 +97,15 @@ def real_time_asl():
                 landmarks = np.zeros((468 + 21 + 33 + 21, 3))
             sequence_data.append(landmarks)
             
-            sign = "None"
-            
             if len(sequence_data) % 15 == 0:
+                sign = "None"
                 prediction = tflite_keras_model(np.array(sequence_data, dtype = np.float32))["outputs"]
                 sign = np.argmax(prediction.numpy(), axis=-1)
+                print(np.array2string(prediction.numpy(), separator=","))
+                print('---------------')
+                cv2.putText(image, f"Prediction:    {decoder(sign)}", (3, 30),
+                                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
                 
-            cv2.putText(image, f"Prediction:    {decoder(sign)}", (3, 30),
-                            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
                 
             cv2.imshow('Webcam Feed',image)
             if cv2.waitKey(10) & 0xFF == ord("q"):
