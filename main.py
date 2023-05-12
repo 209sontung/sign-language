@@ -7,13 +7,8 @@ import cv2
 import time
 import mediapipe as mp
 
-
 mp_holistic = mp.solutions.holistic 
 mp_drawing = mp.solutions.drawing_utils
-
-
-sign_map = load_json_file(CFG.data_dir + 'sign_to_prediction_index_map.json')
-train_data = pd.read_csv(CFG.data_dir + 'train.csv')
 
 s2p_map = {k.lower():v for k,v in load_json_file(CFG.data_dir + "sign_to_prediction_index_map.json").items()}
 p2s_map = {v:k for k,v in load_json_file(CFG.data_dir + "sign_to_prediction_index_map.json").items()}
