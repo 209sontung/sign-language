@@ -40,6 +40,7 @@ POINT_LANDMARKS = LIP + LHAND + RHAND + NOSE + REYE + LEYE #+POSE
 NUM_NODES = len(POINT_LANDMARKS)
 CHANNELS = 6*NUM_NODES
 
-print(NUM_NODES)
-print(CHANNELS)
+if __name__ == "__main__":
+    print(NUM_NODES)
+    print(CHANNELS)
 
