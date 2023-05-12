@@ -1,4 +1,4 @@
-from config import MAX_LEN, POINT_LANDMARKS
+from .config import MAX_LEN, POINT_LANDMARKS
 import tensorflow as tf
 
 def tf_nan_mean(x, axis=0, keepdims=False):

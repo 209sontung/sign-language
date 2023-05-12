@@ -1,11 +1,10 @@
-from config import ROWS_PER_FRAME, DATA_DIR, SEQ_LEN
+from .config import ROWS_PER_FRAME, SEQ_LEN
 import json
 import cv2
 import mediapipe as mp
 import numpy as np
 
 class CFG:
-    data_dir = DATA_DIR
     sequence_length = SEQ_LEN
     rows_per_frame = ROWS_PER_FRAME
 

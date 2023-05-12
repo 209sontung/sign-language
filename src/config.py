@@ -1,7 +1,5 @@
 import numpy as np
 
-DATA_DIR = "/Users/sontung/Documents /MyDocuments/NEU/Thesis/sign_language/resources/"
-
 THRESH_HOLD = 0.2
 
 SEQ_LEN = 30
