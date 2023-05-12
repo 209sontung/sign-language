@@ -224,5 +224,5 @@ def get_model(max_len=MAX_LEN, dropout_step=0, dim=192):
     x = tf.keras.layers.Dense(dim*2,activation=None,name='top_conv')(x)
     x = tf.keras.layers.GlobalAveragePooling1D()(x)
     x = LateDropout(0.8, start_step=dropout_step)(x)
-    x = tf.keras.layers.Dense(NUM_CLASSES,name='classifier')(x)
+    x = tf.keras.layers.Dense(NUM_CLASSES,name='classifier', activation = 'softmax')(x)
     return tf.keras.Model(inp, x)
