@@ -107,12 +107,12 @@ def real_time_asl():
             sign = ""
             
             
-            if len(sequence_data) % 15 == 0:
-                print(time.time() - start)
+            if len(sequence_data) % 30 == 0:
+                # print(time.time() - start)
                 prediction = tflite_keras_model(np.array(sequence_data, dtype = np.float32))["outputs"]
 
                 print(np.max(prediction.numpy(), axis=-1))
-                if np.max(prediction.numpy(), axis=-1) > 0.5:
+                if np.max(prediction.numpy(), axis=-1) > 0.2:
                     sign = np.argmax(prediction.numpy(), axis=-1)
                 
                 sequence_data = []
@@ -122,7 +122,7 @@ def real_time_asl():
             
             # print(len(sequence_data))
             if sign != "" and decoder(sign) not in res:
-                res.append(decoder(sign))
+                res.insert(0, decoder(sign))
             
             
             # cv2.putText(image, f"Prediction:    {decoder(sign)}", (3, 35),
