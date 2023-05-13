@@ -16,7 +16,7 @@
 ## <a name="overview"></a> Overview
 Sign language is an important means of communication for individuals with hearing impairments. This project aims to build a real-time sign language gesture recognition system using deep learning techniques. The system utilizes 1D Convolutional Neural Networks (1DCNN) and Transformers to recognize sign language gestures based on the hand landmarks extracted from MediaPipe.
 
-## <a name="prerequisites"></a> Prerequisites:
+## <a name="prerequisites"></a> Prerequisites
 
 - Python 3.7+
 - NumPy
