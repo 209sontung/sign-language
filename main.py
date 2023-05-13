@@ -1,27 +1,21 @@
-from backbone import TFLiteModel, get_model
-from landmarks_extraction import mediapipe_detection, draw, extract_coordinates, load_json_file,  CFG 
-from config import SEQ_LEN, THRESH_HOLD
+from src.backbone import TFLiteModel, get_model
+from src.landmarks_extraction import mediapipe_detection, draw, extract_coordinates, load_json_file 
+from src.config import SEQ_LEN, THRESH_HOLD
 import numpy as np
-import pandas as pd
 import cv2
 import time
 import mediapipe as mp
 
-
 mp_holistic = mp.solutions.holistic 
 mp_drawing = mp.solutions.drawing_utils
 
-
-sign_map = load_json_file(CFG.data_dir + 'sign_to_prediction_index_map.json')
-train_data = pd.read_csv(CFG.data_dir + 'train.csv')
-
-s2p_map = {k.lower():v for k,v in load_json_file(CFG.data_dir + "sign_to_prediction_index_map.json").items()}
-p2s_map = {v:k for k,v in load_json_file(CFG.data_dir + "sign_to_prediction_index_map.json").items()}
+s2p_map = {k.lower():v for k,v in load_json_file("./sign_to_prediction_index_map.json").items()}
+p2s_map = {v:k for k,v in load_json_file("./sign_to_prediction_index_map.json").items()}
 encoder = lambda x: s2p_map.get(x.lower())
 decoder = lambda x: p2s_map.get(x)
 
 models_path = [
-                '/Users/sontung/Documents /MyDocuments/NEU/Thesis/sign_language/models/islr-fp16-192-8-seed_all42-foldall-last.h5',
+                './models/islr-fp16-192-8-seed_all42-foldall-last.h5',
 ]
 models = [get_model() for _ in models_path]
 for model,path in zip(models,models_path):
