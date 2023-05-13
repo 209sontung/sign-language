@@ -2,21 +2,61 @@ from .config import MAX_LEN, POINT_LANDMARKS
 import tensorflow as tf
 
 def tf_nan_mean(x, axis=0, keepdims=False):
+    """
+    Computes the mean of the input tensor while ignoring NaN values.
+
+    Args:
+        x: Input tensor.
+        axis: Axis along which to compute the mean. Default is 0.
+        keepdims: Whether to keep the dimensions of the input tensor. Default is False.
+
+    Returns:
+        The mean of the input tensor with NaN values ignored.
+    """
     return tf.reduce_sum(tf.where(tf.math.is_nan(x), tf.zeros_like(x), x), axis=axis, keepdims=keepdims) / tf.reduce_sum(tf.where(tf.math.is_nan(x), tf.zeros_like(x), tf.ones_like(x)), axis=axis, keepdims=keepdims)
 
 def tf_nan_std(x, center=None, axis=0, keepdims=False):
+    """
+    Computes the standard deviation of the input tensor while ignoring NaN values.
+
+    Args:
+        x: Input tensor.
+        center: Tensor representing the mean of the input tensor. If None, the mean is computed internally.
+        axis: Axis along which to compute the standard deviation. Default is 0.
+        keepdims: Whether to keep the dimensions of the input tensor. Default is False.
+
+    Returns:
+        The standard deviation of the input tensor with NaN values ignored.
+    """
     if center is None:
         center = tf_nan_mean(x, axis=axis,  keepdims=True)
     d = x - center
     return tf.math.sqrt(tf_nan_mean(d * d, axis=axis, keepdims=keepdims))
 
 class Preprocess(tf.keras.layers.Layer):
+    """
+    Preprocessing layer for input data.
+
+    Args:
+        max_len: Maximum length of the input sequence. Default is MAX_LEN from config.
+        point_landmarks: List of point landmarks to extract from the input. Default is POINT_LANDMARKS from config.
+    """
+    
     def __init__(self, max_len=MAX_LEN, point_landmarks=POINT_LANDMARKS, **kwargs):
         super().__init__(**kwargs)
         self.max_len = max_len
         self.point_landmarks = point_landmarks
 
     def call(self, inputs):
+        """
+        Preprocesses the input data.
+
+        Args:
+            inputs: Input tensor.
+
+        Returns:
+            Preprocessed tensor.
+        """
         if tf.rank(inputs) == 3:
             x = inputs[None,...]
         else:
