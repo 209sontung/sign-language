@@ -1,3 +1,5 @@
+![Logo](/assets/sign_logo_straight.png)
+
 ### Table of Contents
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
