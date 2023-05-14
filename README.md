@@ -8,6 +8,7 @@
 - [Models](#models)
 - [Directory Structure](#directory)
 - [Contributing](#contributing)
+- [Acknowledgments](#acknowledgments)
 - [License](#license)
 
 
@@ -112,6 +113,9 @@ The directory structure of this repository is as follows:
 
 ## <a name="contributing"></a> Contributing
 Contributions to this project are welcome. If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+
+## <a name="acknowledgments"></a> Acknowledgments
+Sincere gratitude is extended to @hoyso48 for providing the idea and initial implementation of the backbone model.
 
 ## <a name="license"></a> License
 This project is licensed under the MIT License. Feel free to use and modify the code as per the terms of the license.
