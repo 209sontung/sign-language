@@ -108,6 +108,8 @@ The directory structure of this repository is as follows:
 │  ├─ islr-fp16-192-8-seed42-fold0-last.h5
 │  └─ islr-fp16-192-8-seed_all42-foldall-last.h5
 ├─ requirements.txt
+├─ Pipfile
+├─ Pipfile.lock
 └─ src
    ├─ backbone.py
    ├─ config.py
