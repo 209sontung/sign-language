@@ -24,7 +24,7 @@ Sign language is an important means of communication for individuals with hearin
 
 ## <a name="prerequisites"></a> Prerequisites
 
-- Python 3.7+
+- Python 3.9
 - NumPy
 - Pandas
 - Matplotlib
