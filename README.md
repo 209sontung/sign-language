@@ -1,5 +1,10 @@
 ![Logo](/assets/sign_logo_straight.png)
 
+![GitHub](https://img.shields.io/github/license/209sontung/sign-language?style=flat-square)
+![GitHub top language](https://img.shields.io/github/languages/top/209sontung/sign-language?style=flat-square)
+![GitHub repo size](https://img.shields.io/github/repo-size/209sontung/sign-language?color=yellow&style=flat-square)
+![GitHub Pipenv locked Python version](https://img.shields.io/github/pipenv/locked/python-version/209sontung/sign-language?color=orange&style=flat-square)
+
 ### Table of Contents
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
