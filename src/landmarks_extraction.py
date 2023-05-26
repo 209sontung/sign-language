@@ -74,10 +74,10 @@ def extract_coordinates(results):
     Returns:
         numpy.ndarray: Array of extracted coordinates.
     """
-    face = np.array([[res.x, res.y, res.z] for res in results.face_landmarks.landmark]) if results.face_landmarks.landmark else np.zeros((468, 3))
-    pose = np.array([[res.x, res.y, res.z] for res in results.pose_landmarks.landmark]) if results.pose_landmarks.landmark else np.zeros((33, 3))
-    lh = np.array([[res.x, res.y, res.z] for res in results.left_hand_landmarks.landmark]) if results.left_hand_landmarks.landmark else np.zeros((21, 3))
-    rh = np.array([[res.x, res.y, res.z] for res in results.right_hand_landmarks.landmark]) if results.right_hand_landmarks.landmark else np.zeros((21, 3))
+    face = np.array([[res.x, res.y, res.z] for res in results.face_landmarks.landmark]) if results.face_landmarks else np.zeros((468, 3)) * np.nan
+    pose = np.array([[res.x, res.y, res.z] for res in results.pose_landmarks.landmark]) if results.pose_landmarks else np.zeros((33, 3)) * np.nan
+    lh = np.array([[res.x, res.y, res.z] for res in results.left_hand_landmarks.landmark]) if results.left_hand_landmarks else np.zeros((21, 3)) * np.nan
+    rh = np.array([[res.x, res.y, res.z] for res in results.right_hand_landmarks.landmark]) if results.right_hand_landmarks else np.zeros((21, 3)) * np.nan
     return np.concatenate([face, lh, pose, rh])
     
 def load_json_file(json_path):
@@ -93,3 +93,6 @@ def load_json_file(json_path):
     with open(json_path, 'r') as f:
         sign_map = json.load(f)
     return sign_map
+
+if __name__ == '__main__':
+    pass

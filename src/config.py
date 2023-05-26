@@ -1,6 +1,6 @@
 import numpy as np
 
-THRESH_HOLD = 0.2
+THRESH_HOLD = 0.5
 
 SEQ_LEN = 30
 ROWS_PER_FRAME = 543
@@ -8,6 +8,7 @@ MAX_LEN = 384
 CROP_LEN = MAX_LEN
 NUM_CLASSES  = 250
 PAD = -100.
+
 NOSE=[
     1,2,98,327
 ]
