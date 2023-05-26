@@ -56,9 +56,12 @@ def real_time_asl():
         # The main loop for the mediapipe detection.
         while cap.isOpened():
             ret, frame = cap.read()
+            
+            start = time.time()
+            
             image, results = mediapipe_detection(frame, holistic)
             draw(image, results)
-
+            
             try:
                 landmarks = extract_coordinates(results)
             except:
@@ -70,9 +73,7 @@ def real_time_asl():
             # Generate the prediction for the given sequence data.
             if len(sequence_data) % SEQ_LEN == 0:
                 prediction = tflite_keras_model(np.array(sequence_data, dtype = np.float32))["outputs"]
-                
-                print(np.max(prediction.numpy(), axis=-1))
-                
+
                 if np.max(prediction.numpy(), axis=-1) > THRESH_HOLD:
                     sign = np.argmax(prediction.numpy(), axis=-1)
                 
